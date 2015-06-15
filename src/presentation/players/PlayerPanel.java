@@ -94,7 +94,7 @@ public class PlayerPanel extends MyPanel {
 	}
 
 	private void initTable() {
-		ArrayList<SeasonPlayer> playerNormalList = this.playerInfoBl.getSeasonPlayer(Season.seasons[1], GameKind.regular_game, DataKind.average, League.all_league, Position.All, AgeRange.All,
+		ArrayList<SeasonPlayer> playerNormalList = this.playerInfoBl.getSeasonPlayer(Season.seasons_with_Career[1], GameKind.regular_game, DataKind.average, League.all_league, Position.All, AgeRange.All,
 				Field.point);
 		this.fillTable(playerNormalList);
 	}
@@ -152,13 +152,17 @@ public class PlayerPanel extends MyPanel {
 
 	private void setTableStyle() {
 		rangeAndNameTable.setTableColumnWidth(0, 50);
-		rangeAndNameTable.setTableColumnWidth(1, 50);
+		rangeAndNameTable.setTableColumnWidth(1, 80);
 		rangeAndNameTable.setTableColumnWidth(2, 80);
 		rangeAndNameTable.setTableColumnWidth(3, 120);
 		playerShowPane.getViewport().setOpaque(false);
 		playerShowPane.setOpaque(false);
 		playerShowPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-		playerShowTable.setAllTableColumnWidth(90);
+		playerShowTable.setAllTableColumnWidth(80);
+		playerShowTable.setTableColumnWidth(0, 105);
+		playerShowTable.setTableColumnWidth(1, 40);
+		playerShowTable.setTableColumnWidth(3, 90);
+		playerShowTable.setTableColumnWidth(4, 90);
 		playerShowTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				checkSelection(false);
@@ -220,7 +224,7 @@ public class PlayerPanel extends MyPanel {
 			leagueChoose = new MyComboBox<Object>(League.leagues);
 			sortFieldChoose = new MyComboBox<Object>(Field.player_sort_fields);
 			dataKindChoose = new MyComboBox<Object>(DataKind.dataKinds);
-			seasonChoose = new MyComboBox<Object>(Season.seasons);
+			seasonChoose = new MyComboBox<Object>(Season.seasons_with_Career);
 			gameKindChoose = new MyComboBox<Object>(GameKind.gameKinds);
 		}
 
@@ -278,7 +282,7 @@ public class PlayerPanel extends MyPanel {
 				int positionInt = positionChoose.getSelectedIndex();
 				int sortFieldInt = sortFieldChoose.getSelectedIndex();
 				//
-				ArrayList<SeasonPlayer> seasonPlayerList = playerInfoBl.getSeasonPlayer(Season.seasons[seasonInt], GameKind.gameKinds[gameKindInt], DataKind.dataKinds[dataKindInt],
+				ArrayList<SeasonPlayer> seasonPlayerList = playerInfoBl.getSeasonPlayer(Season.seasons_with_Career[seasonInt], GameKind.gameKinds[gameKindInt], DataKind.dataKinds[dataKindInt],
 						League.leagues[leagueInt], Position.positions[positionInt], AgeRange.ageRanges[ageRangeInt], Field.player_sort_fields[sortFieldInt]);
 				clearTable();
 				fillTable(seasonPlayerList);
@@ -386,7 +390,7 @@ public class PlayerPanel extends MyPanel {
 			positionChoose = new MyComboBox<Object>(Position.positions);
 			leagueChoose = new MyComboBox<Object>(League.leagues);
 			dataKindChoose = new MyComboBox<Object>(DataKind.dataKinds);
-			seasonChoose = new MyComboBox<Object>(Season.seasons);
+			seasonChoose = new MyComboBox<Object>(Season.seasons_with_Career);
 			gameKindChoose = new MyComboBox<Object>(GameKind.gameKinds);
 		}
 
@@ -472,7 +476,7 @@ public class PlayerPanel extends MyPanel {
 					int leagueInt = leagueChoose.getSelectedIndex();
 					int positionInt = positionChoose.getSelectedIndex();
 					//
-					ArrayList<SeasonPlayer> seasonPlayerList = playerInfoBl.getSeasonPlayer(Season.seasons[seasonInt], GameKind.gameKinds[gameKindInt], DataKind.dataKinds[dataKindInt],
+					ArrayList<SeasonPlayer> seasonPlayerList = playerInfoBl.getSeasonPlayer(Season.seasons_with_Career[seasonInt], GameKind.gameKinds[gameKindInt], DataKind.dataKinds[dataKindInt],
 							League.leagues[leagueInt], Position.positions[positionInt], AgeRange.ageRanges[ageRangeInt], cellList);
 					clearTable();
 					fillTable(seasonPlayerList);

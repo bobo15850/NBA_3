@@ -1,14 +1,11 @@
 package common.datastructure;
 
-import common.statics.Position;
-
-public class PlayerHotInfo {
+public class PlayerKingInfo extends HotVo {
 	private String field;
 	private String playerId;
 	private String playerName;
-	private Position position;
+	private String position;
 	private String teamName;
-	private double upgradeRate;
 	private double value;
 
 	public String getField() {
@@ -19,19 +16,11 @@ public class PlayerHotInfo {
 		this.field = field;
 	}
 
-	public String getPlayerId() {
-		return playerId;
-	}
-
-	public void setPlayerId(String playerId) {
-		this.playerId = playerId;
-	}
-
-	public Position getPosition() {
+	public String getPosition() {
 		return position;
 	}
 
-	public void setPosition(Position position) {
+	public void setPosition(String position) {
 		this.position = position;
 	}
 
@@ -43,20 +32,20 @@ public class PlayerHotInfo {
 		this.teamName = teamName;
 	}
 
-	public double getUpgradeRate() {
-		return upgradeRate;
-	}
-
-	public void setUpgradeRate(double upgradeRate) {
-		this.upgradeRate = upgradeRate;
-	}
-
 	public double getValue() {
 		return value;
 	}
 
 	public void setValue(double value) {
 		this.value = value;
+	}
+
+	public String getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(String playerId) {
+		this.playerId = playerId;
 	}
 
 	public String getPlayerName() {
@@ -66,5 +55,4 @@ public class PlayerHotInfo {
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
-
 }
