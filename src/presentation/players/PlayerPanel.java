@@ -58,14 +58,13 @@ public class PlayerPanel extends MyPanel {
 			"totalShot", "threeHit", "threeShot", "three", "twoShot", "twoHit", "two", "shotEFF", "freeHit", "freeShot", "free", "offRebound", "defRebound", "playerEFF", "realShot", "threeEFF",
 			"freeEFF", "offReboundEFF", "defReboundEFF", "totReboundEFF", "assistEFF", "stealEFF", "blockEFF", "faultEFF", "useEFF", "offWinShare", "defWinShare", "winShare", "winSharePer48",
 			"offBoxPM", "defBoxPM", "BoxPM", "replaceValue" };
-	private String identity[] = { "rank", "portrait", "playerId", "name" };
+	private String identity[] = { "rank", "photo", "playerId", "name" };
 	private PlayerInfoBlService playerInfoBl = new PlayerInfoBl();
 
 	public PlayerPanel() {
 		this.createObjects();
 		this.setComponentsLocation();
 		this.initTable();
-		this.setTableStyle();
 		rangeAndNameTable.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
@@ -111,6 +110,7 @@ public class PlayerPanel extends MyPanel {
 			}
 			playerShowTable.updateUI();
 			rangeAndNameTable.updateUI();
+			setTableStyle();
 		}
 	}
 
@@ -152,18 +152,15 @@ public class PlayerPanel extends MyPanel {
 	}
 
 	private void setTableStyle() {
-		rangeAndNameTable.setTableColumnWidth(0, 50);
-		rangeAndNameTable.setTableColumnWidth(1, 80);
+		rangeAndNameTable.setTableColumnWidth(0, 40);
+		rangeAndNameTable.setTableColumnWidth(1, 60);
 		rangeAndNameTable.setTableColumnWidth(2, 80);
-		rangeAndNameTable.setTableColumnWidth(3, 120);
+		rangeAndNameTable.setTableColumnWidth(3, 150);
 		playerShowPane.getViewport().setOpaque(false);
 		playerShowPane.setOpaque(false);
 		playerShowPane.setBorder(new EmptyBorder(0, 0, 0, 0));
-		playerShowTable.setAllTableColumnWidth(80);
-		playerShowTable.setTableColumnWidth(0, 105);
-		playerShowTable.setTableColumnWidth(1, 40);
-		playerShowTable.setTableColumnWidth(3, 90);
-		playerShowTable.setTableColumnWidth(4, 90);
+		playerShowTable.setAllTableColumnWidth(120);
+		playerShowTable.setTableColumnWidth(0, 180);
 		playerShowTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
 				checkSelection(false);
