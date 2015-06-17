@@ -1,12 +1,13 @@
 package common.datastructure;
 
-public class PlayerHotInfo extends HotVo {
+import common.statics.Position;
+
+public class PlayerHotInfo {
 	private String field;
 	private String playerId;
-	private String playerName;
-	private String position;
+	private Position position;
 	private String teamName;
-	private double upgradeRate;
+	private double upGradeRate;
 	private double value;
 
 	public String getField() {
@@ -25,6 +26,14 @@ public class PlayerHotInfo extends HotVo {
 		this.playerId = playerId;
 	}
 
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+
 	public String getTeamName() {
 		return teamName;
 	}
@@ -33,12 +42,12 @@ public class PlayerHotInfo extends HotVo {
 		this.teamName = teamName;
 	}
 
-	public double getUpgradeRate() {
-		return upgradeRate;
+	public double getUpGradeRate() {
+		return upGradeRate;
 	}
 
-	public void setUpgradeRate(double upgradeRate) {
-		this.upgradeRate = upgradeRate;
+	public void setUpGradeRate(double upGradeRate) {
+		this.upGradeRate = upGradeRate;
 	}
 
 	public double getValue() {
@@ -47,22 +56,6 @@ public class PlayerHotInfo extends HotVo {
 
 	public void setValue(double value) {
 		this.value = value;
-	}
-
-	public String getPlayerName() {
-		return playerName;
-	}
-
-	public void setPlayerName(String playerName) {
-		this.playerName = playerName;
-	}
-
-	public String getPosition() {
-		return position;
-	}
-
-	public void setPosition(String position) {
-		this.position = position;
 	}
 
 }

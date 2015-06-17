@@ -13,8 +13,5 @@ public class League {
 
 	public static final League west = new League("West");
 	public static final League east = new League("East");
-	public static final League all_league = new League("all_league");
-
-	//
-	public static final League[] leagues = { all_league, west, east };
+	public static final League all_league = new League("All");
 }

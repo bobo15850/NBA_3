@@ -18,15 +18,22 @@ import businesslogicservice.player.PlayerInfoBlService;
 public class PlayerInfoBl implements PlayerInfoBlService {
 	private PlayerInfoDataService playerInfoData = new PlayerInfoData();
 
+	@Override
 	public ArrayList<SeasonPlayer> getSeasonPlayer(Season season, GameKind gameKind, DataKind dataKind, League league, Position position, AgeRange ageRange, Field sortField) {
-		return playerInfoData.getSeasonPlayer(season, gameKind, dataKind, league, position, ageRange, sortField);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
+	@Override
 	public ArrayList<SeasonPlayer> vagueSearch(String str) {
-		return playerInfoData.vagueSearch(str);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public ArrayList<SeasonPlayer> getSeasonPlayer(Season season, GameKind gameKind, DataKind dataKind, League league, Position position, AgeRange ageRange, ArrayList<CombineSelectionCell> cellList) {
-		return playerInfoData.getSeasonPlayer(season, gameKind, dataKind, league, position, ageRange, cellList);
+	@Override
+	public ArrayList<SeasonPlayer> getSeasonPlayer(CombineSelectionCell[] combineSelectionCells) {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 }
