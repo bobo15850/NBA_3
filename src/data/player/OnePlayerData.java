@@ -1,36 +1,92 @@
 package data.player;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import mysqldatabase.DB;
+import beans.Bean;
 import beans.GamePlayer;
 import beans.GeneralPlayer;
 import beans.SeasonPlayer;
-
 import common.statics.DataKind;
 import common.statics.Field;
 import common.statics.GameKind;
 import common.statics.Season;
-
 import dataservice.player.OnePlayerDataService;
 
 public class OnePlayerData implements OnePlayerDataService {
+	private DB db = DB.getInstance();
 
-	@Override
 	public GeneralPlayer getGeneralPlayer(String playerId) {
-		// TODO Auto-generated method stub
+		if (playerId != null) {
+			String sql = "select * from generalplayer where playerId = '" + playerId + "'";
+			ResultSet rs = this.db.find(sql);
+			ArrayList<GeneralPlayer> generalPlayerList = Bean.resultSetToList(rs, new GeneralPlayer());
+			if (generalPlayerList != null && generalPlayerList.size() == 1) {
+				return generalPlayerList.get(0);
+			}
+		}
 		return null;
-	}
+	}// 得到球员的基本信息
 
-	@Override
 	public ArrayList<SeasonPlayer> getSeasonPlayer(String playerId, GameKind gameKind, DataKind dataKind, Field sortField) {
-		// TODO Auto-generated method stub
+		if (playerId != null && gameKind != null && dataKind != null && sortField != null) {
+			int isPlayOff = 0;
+			if (GameKind.playOff_game.equals(gameKind)) {
+				isPlayOff = 1;
+			}
+			String sql = "select " + SeasonPlayer.getAvgSqlString() + " from seasonplayer where playerId = '" + playerId + "' and isPlayOff=" + isPlayOff + " order by " + sortField.toString()
+					+ " desc";
+			if (DataKind.total.equals(dataKind)) {
+				sql = "select * from seasonplayer where playerId = '" + playerId + "' and isPlayOff=" + isPlayOff + " order by " + sortField.toString() + " desc";
+			}
+			ResultSet rs = this.db.find(sql);
+			ArrayList<SeasonPlayer> seasonPlayerList = Bean.resultSetToList(rs, new SeasonPlayer());
+			if (seasonPlayerList != null && seasonPlayerList.size() != 0) {
+				return seasonPlayerList;
+			}
+		}
+		return null;
+	}// 得到一个球员所有赛季的数据
+
+	public ArrayList<GamePlayer> getGamePlayer(String playerId, Season season, GameKind gameKind, Field sortField) {
+		if (playerId != null && season != null && sortField != null) {
+			int isPlayOff = 0;
+			if (GameKind.playOff_game.equals(gameKind)) {
+				isPlayOff = 1;
+			}
+			String sql = "select * from gameplayer where playerId = '" + playerId + "' and date in (select date from generalgame where date between '" + season.getStartDate() + "' and '"
+					+ season.getFinishDate() + "' and isPlayOff = " + isPlayOff + ") order by " + sortField.toString() + " desc";
+			ResultSet rs = this.db.find(sql);
+			ArrayList<GamePlayer> gamePlayerList = Bean.resultSetToList(rs, new GamePlayer());
+			if (gamePlayerList != null && gamePlayerList.size() != 0) {
+				return gamePlayerList;
+			}
+		}
+		return null;
+	}// 得到一个球员一个赛季里的所有比赛
+
+	public ArrayList<String> getSeasonsOfPlayer(String playerId, GameKind gameKind) {
+		if (playerId != null && gameKind != null) {
+			ArrayList<String> playerIdList = new ArrayList<String>();
+			int isPlayOff = 0;
+			if (GameKind.playOff_game.equals(gameKind)) {
+				isPlayOff = 1;
+			}
+			String sql = "select distinct season from seasonplayer where playerId = '" + playerId + "' and isPlayOff =" + isPlayOff + " and season <> 'Career' order by season desc";
+			ResultSet rs = this.db.find(sql);
+			try {
+				while (rs.next()) {
+					playerIdList.add(rs.getString("season"));
+				}
+				if (playerIdList != null && playerIdList.size() != 0) {
+					return playerIdList;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return null;
 	}
-
-	@Override
-	public ArrayList<GamePlayer> getGamePlayer(String playerId, Season season, Field sortField) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }
